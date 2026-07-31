@@ -13,9 +13,14 @@ import Testing
 
 @testable import System_Primitives
 
-@Suite("System")
-struct SystemTests {
+@Suite
+struct `System Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `System Tests`.Unit {
     @Test
     func `Topology types are constructible`() {
         let node = System.Topology.NUMA.Node(
