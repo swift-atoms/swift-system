@@ -1,14 +1,3 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-system open source project
-//
-// Copyright (c) 2024-2025 Coen ten Thije Boonkkamp and the swift-system project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Testing
 
 @testable import System_Primitives
@@ -55,21 +44,4 @@ extension `System Tests`.Unit {
         #expect(nonUniform == .nonUniform(nodes: []))
     }
 
-    //    @Test
-    //    func `Processor.count returns positive value`() {
-    //        let count = System.Processor.count
-    //        #expect(count >= .one)
-    //    }
-    //
-    //    @Test
-    //    func `Synthetic node creation`() {
-    //        let cpuCount = Int(System.Processor.count)
-    //        let syntheticNode = System.Topology.NUMA.Node(
-    //            id: 0,
-    //            cpus: Set(0..<cpuCount),
-    //            isSynthetic: true
-    //        )
-    //        #expect(syntheticNode.isSynthetic == true)
-    //        #expect(syntheticNode.cpus.count == cpuCount)
-    //    }
 }
