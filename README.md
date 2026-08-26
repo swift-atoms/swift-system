@@ -1,4 +1,4 @@
-# System Primitives
+# System
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -11,7 +11,7 @@ Hardware-environment value types for Swift — a `System` namespace of CPU topol
 `System` is a vocabulary of types describing "what the hardware is": logical CPU count, NUMA node layout, total memory, page size, processor counts. It holds the *shapes* only — no `sysctl`, no `uname`, no C imports — so the same values travel unchanged from a platform package that discovers them (kernel / POSIX / Windows) through every layer that consumes them.
 
 ```swift
-import System_Primitives
+import System
 
 // Describe a NUMA node: which logical CPUs share a local memory domain.
 let node = System.Topology.NUMA.Node(id: 0, cpus: [0, 1, 2, 3], isSynthetic: false)
@@ -30,7 +30,7 @@ if case .nonUniform(let nodes) = topology.numa {
 Hardware measurements are phantom-tagged integers — distinct types that cannot be accidentally crossed:
 
 ```swift
-import System_Primitives
+import System
 
 let totalRAM: System.Memory.Capacity = 17_179_869_184   // 16 GiB, in bytes
 let pageSize: System.Page.Size = 16_384                 // Apple Silicon
@@ -51,7 +51,7 @@ print(gigabytes, Int(cpuCount))   // 16 8
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-system-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-system.git", branch: "main")
 ]
 ```
 
@@ -59,7 +59,7 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "System Primitives", package: "swift-system-primitives"),
+        .product(name: "System", package: "swift-system"),
     ]
 )
 ```
@@ -74,8 +74,8 @@ Two library products. Depends only on the `Cardinal`, `Ordinal`, and `Memory.Ali
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `System Primitives` | `Sources/System Primitives/` | The `System` namespace: `System.Topology` + `System.Topology.NUMA` (`State`, `Node`); `System.Name`; and the phantom-tagged measurements `System.Memory.Capacity`, `System.Page.Size`, `System.Processor.{Count, ID}`, `System.Path.Length`. |
-| `System Primitives Test Support` | `Tests/Support/` | Re-exports the main target for test consumers. |
+| `System` | `Sources/System/` | The `System` namespace: `System.Topology` + `System.Topology.NUMA` (`State`, `Node`); `System.Name`; and the phantom-tagged measurements `System.Memory.Capacity`, `System.Page.Size`, `System.Processor.{Count, ID}`, `System.Path.Length`. |
+| `System Test Support` | `Tests/Support/` | Re-exports the main target for test consumers. |
 
 Foundation-free.
 
