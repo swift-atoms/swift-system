@@ -44,7 +44,13 @@ let package = Package(
         ),
         .testTarget(
             name: "System Tests",
-            dependencies: ["System"]
+            dependencies: ["System"],
+            linkerSettings: [
+                .unsafeFlags(
+                    ["-Xlinker", "-search_dylibs_first"],
+                    .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS])
+                )
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]
