@@ -17,50 +17,34 @@ let package = Package(
             targets: ["System"]
         ),
         .library(
-            name: "System Test Support",
-            targets: ["System Test Support"]
+            name: "System Standard Library Integration",
+            targets: ["System Standard Library Integration"]
+        ),
+        .library(
+            name: "System Apple Foundation Integration",
+            targets: ["System Apple Foundation Integration"]
         ),
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/swift-molecules/swift-cardinal.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-ordinal.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-memory.git",
-            branch: "main"
-        ),
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "System",
-            dependencies: [
-                .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(name: "Memory Alignment", package: "swift-memory"),
-            ]
+            dependencies: []
         ),
         .target(
-            name: "System Test Support",
+            name: "System Standard Library Integration",
+            dependencies: ["System"]
+        ),
+        .target(
+            name: "System Apple Foundation Integration",
             dependencies: [
                 "System",
-                .product(
-                    name: "Cardinal Test Support",
-                    package: "swift-cardinal"
-                ),
-            ],
-            path: "Tests/Support"
+                "System Standard Library Integration",
+            ]
         ),
         .testTarget(
             name: "System Tests",
-            dependencies: [
-                "System",
-                "System Test Support",
-            ]
+            dependencies: ["System"]
         ),
     ],
     swiftLanguageModes: [.v6]
