@@ -17,39 +17,49 @@ let package = Package(
             targets: ["System"]
         ),
         .library(
-            name: "System Standard Library Integration",
-            targets: ["System Standard Library Integration"]
-        ),
-        .library(
-            name: "System Apple Foundation Integration",
-            targets: ["System Apple Foundation Integration"]
+            name: "System Test Support",
+            targets: ["System Test Support"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            url: "https://github.com/swift-molecules/swift-cardinal.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-ordinal.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-memory.git",
+            branch: "main"
+        ),
+    ],
     targets: [
         .target(
             name: "System",
-            dependencies: []
+            dependencies: [
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Memory Alignment", package: "swift-memory"),
+            ]
         ),
         .target(
-            name: "System Standard Library Integration",
-            dependencies: ["System"]
-        ),
-        .target(
-            name: "System Apple Foundation Integration",
+            name: "System Test Support",
             dependencies: [
                 "System",
-                "System Standard Library Integration",
-            ]
+                .product(
+                    name: "Cardinal Test Support",
+                    package: "swift-cardinal"
+                ),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "System Tests",
-            dependencies: ["System"],
-            linkerSettings: [
-                .unsafeFlags(
-                    ["-Xlinker", "-search_dylibs_first"],
-                    .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS])
-                )
+            dependencies: [
+                "System",
+                "System Test Support",
             ]
         ),
     ],
