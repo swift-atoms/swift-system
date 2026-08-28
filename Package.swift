@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-system-primitives",
+    name: "swift-system",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -13,53 +13,53 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "System Primitives",
-            targets: ["System Primitives"]
+            name: "System",
+            targets: ["System"]
         ),
         .library(
-            name: "System Primitives Test Support",
-            targets: ["System Primitives Test Support"]
+            name: "System Test Support",
+            targets: ["System Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-cardinal-primitives.git",
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-ordinal-primitives.git",
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-memory-primitives.git",
+            url: "https://github.com/swift-atoms/swift-memory.git",
             branch: "main"
         ),
     ],
     targets: [
         .target(
-            name: "System Primitives",
+            name: "System",
             dependencies: [
-                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
-                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
-                .product(name: "Memory Alignment Primitives", package: "swift-memory-primitives"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Memory", package: "swift-memory"),
             ]
         ),
         .target(
-            name: "System Primitives Test Support",
+            name: "System Test Support",
             dependencies: [
-                "System Primitives",
+                .target(name: "System"),
                 .product(
-                    name: "Cardinal Primitives Test Support",
-                    package: "swift-cardinal-primitives"
+                    name: "Cardinal Standard Library Integration",
+                    package: "swift-cardinal"
                 ),
             ],
             path: "Tests/Support"
         ),
         .testTarget(
-            name: "System Primitives Tests",
+            name: "System Tests",
             dependencies: [
-                "System Primitives",
-                "System Primitives Test Support",
+                .target(name: "System"),
+                .target(name: "System Test Support"),
             ]
         ),
     ],

@@ -1,4 +1,4 @@
-public import Memory_Alignment_Primitives
+public import Memory_Alignment
 
 extension Memory.Alignment {
 
