@@ -1,4 +1,4 @@
-# System
+# System Primitives
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -51,7 +51,7 @@ print(gigabytes, Int(cpuCount))   // 16 8
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-molecules/swift-system.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-system.git", branch: "main")
 ]
 ```
 
@@ -74,7 +74,7 @@ Two library products. Depends only on the `Cardinal`, `Ordinal`, and `Memory.Ali
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `System` | `Sources/System/` | The `System` namespace: `System.Topology` + `System.Topology.NUMA` (`State`, `Node`); `System.Name`; and the phantom-tagged measurements `System.Memory.Capacity`, `System.Page.Size`, `System.Processor.{Count, ID}`, `System.Path.Length`. |
+| `System Primitives` | `Sources/System Primitives/` | The `System` namespace: `System.Topology` + `System.Topology.NUMA` (`State`, `Node`); `System.Name`; and the phantom-tagged measurements `System.Memory.Capacity`, `System.Page.Size`, `System.Processor.{Count, ID}`, `System.Path.Length`. |
 | `System Test Support` | `Tests/Support/` | Re-exports the main target for test consumers. |
 
 Foundation-free.

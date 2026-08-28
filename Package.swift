@@ -23,15 +23,15 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-cardinal.git",
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-ordinal.git",
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-memory.git",
+            url: "https://github.com/swift-atoms/swift-memory.git",
             branch: "main"
         ),
     ],
@@ -41,15 +41,15 @@ let package = Package(
             dependencies: [
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(name: "Memory Alignment", package: "swift-memory"),
+                .product(name: "Memory", package: "swift-memory"),
             ]
         ),
         .target(
             name: "System Test Support",
             dependencies: [
-                "System",
+                .target(name: "System"),
                 .product(
-                    name: "Cardinal Test Support",
+                    name: "Cardinal Standard Library Integration",
                     package: "swift-cardinal"
                 ),
             ],
@@ -58,8 +58,8 @@ let package = Package(
         .testTarget(
             name: "System Tests",
             dependencies: [
-                "System",
-                "System Test Support",
+                .target(name: "System"),
+                .target(name: "System Test Support"),
             ]
         ),
     ],
