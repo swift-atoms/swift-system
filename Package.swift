@@ -34,24 +34,29 @@ let package = Package(
             url: "https://github.com/swift-atoms/swift-memory.git",
             branch: "main"
         ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-tagged.git",
+            branch: "main"
+        ),
     ],
     targets: [
         .target(
             name: "System",
             dependencies: [
                 .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(
+                    name: "Cardinal Standard Library Integration",
+                    package: "swift-cardinal"
+                ),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Memory", package: "swift-memory"),
+                .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),
         .target(
             name: "System Test Support",
             dependencies: [
                 .target(name: "System"),
-                .product(
-                    name: "Cardinal Standard Library Integration",
-                    package: "swift-cardinal"
-                ),
             ],
             path: "Tests/Support"
         ),
