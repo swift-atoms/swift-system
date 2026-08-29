@@ -1,4 +1,6 @@
-public import Memory_Alignment
+public import Cardinal_Standard_Library_Integration
+public import Memory
+public import Tagged
 
 extension Memory.Alignment {
 
