@@ -12,14 +12,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(
-            name: "System",
-            targets: ["System"]
-        ),
-        .library(
-            name: "System Test Support",
-            targets: ["System Test Support"]
-        ),
+        .library(name: "System", targets: ["System"]),
+        .library(name: "System Standard Library Integration", targets: ["System Standard Library Integration"]),
+        .library(name: "System Foundation Library Integration", targets: ["System Foundation Library Integration"]),
+        .library(name: "System Test Support", targets: ["System Test Support"]),
     ],
     dependencies: [
         .package(
@@ -44,14 +40,27 @@ let package = Package(
             name: "System",
             dependencies: [
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(
-                    name: "Cardinal Standard Library Integration",
-                    package: "swift-cardinal"
-                ),
+                .product(name: "Cardinal Standard Library Integration", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Tagged", package: "swift-tagged"),
-            ]
+            ],
+            path: "Sources/System"
+        ),
+        .target(
+            name: "System Standard Library Integration",
+            dependencies: [
+                .target(name: "System"),
+            ],
+            path: "Sources/System Standard Library Integration"
+        ),
+        .target(
+            name: "System Foundation Library Integration",
+            dependencies: [
+                .target(name: "System"),
+                .target(name: "System Standard Library Integration"),
+            ],
+            path: "Sources/System Foundation Library Integration"
         ),
         .target(
             name: "System Test Support",
@@ -65,14 +74,17 @@ let package = Package(
             dependencies: [
                 .target(name: "System"),
                 .target(name: "System Test Support"),
-            ]
+                .target(name: "System Standard Library Integration"),
+                .target(name: "System Foundation Library Integration"),
+            ],
+            path: "Tests/System Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -81,8 +93,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }
