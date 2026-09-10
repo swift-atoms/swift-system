@@ -1,5 +1,3 @@
-# .github/metadata.yaml
-# Triaged by AI-assisted bulk pass (2026-04-29).
 description: "Phantom-tagged CPU topology, NUMA layout, and memory/processor measurement types for Swift."
 topics:
   - primitives
