@@ -40,7 +40,7 @@ let package = Package(
             name: "System",
             dependencies: [
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Cardinal Standard Library Integration", package: "swift-cardinal"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Tagged", package: "swift-tagged"),
