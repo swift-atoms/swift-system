@@ -40,7 +40,6 @@ let package = Package(
             name: "System",
             dependencies: [
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Tagged", package: "swift-tagged"),
@@ -76,6 +75,7 @@ let package = Package(
                 .target(name: "System Test Support"),
                 .target(name: "System Standard Library Integration"),
                 .target(name: "System Foundation Library Integration"),
+                .product(name: "Memory", package: "swift-memory"),
             ],
             path: "Tests/System Tests"
         ),

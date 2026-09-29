@@ -1,5 +1,4 @@
 public import Cardinal
-public import Cardinal
 public import Tagged
 
 extension System {
@@ -16,6 +15,6 @@ extension Int {
 
     @inlinable
     public init(_ length: System.Path.Length) {
-        self = Int(bitPattern: length)
+        self = Int(bitPattern: length.underlying.rawValue)
     }
 }
