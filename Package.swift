@@ -77,7 +77,8 @@ let package = Package(
                 .target(name: "System Foundation Library Integration"),
                 .product(name: "Memory", package: "swift-memory"),
             ],
-            path: "Tests/System Tests"
+            path: "Tests/System Tests",
+            linkerSettings: [.linkedLibrary("System.B", .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS]))]
         ),
     ],
     swiftLanguageModes: [.v6]
