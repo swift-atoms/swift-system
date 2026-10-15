@@ -1,6 +1,6 @@
 import Testing
 
-@testable import System
+@testable import System_Primitives
 
 @Suite
 struct `System Tests` {

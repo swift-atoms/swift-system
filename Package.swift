@@ -12,7 +12,7 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(name: "System", targets: ["System"]),
+        .library(name: "System Primitives", targets: ["System Primitives"]),
         .library(name: "System Standard Library Integration", targets: ["System Standard Library Integration"]),
         .library(name: "System Foundation Library Integration", targets: ["System Foundation Library Integration"]),
         .library(name: "System Test Support", targets: ["System Test Support"]),
@@ -37,26 +37,26 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "System",
+            name: "System Primitives",
             dependencies: [
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Tagged", package: "swift-tagged"),
             ],
-            path: "Sources/System"
+            path: "Sources/System Primitives"
         ),
         .target(
             name: "System Standard Library Integration",
             dependencies: [
-                .target(name: "System"),
+                .target(name: "System Primitives"),
             ],
             path: "Sources/System Standard Library Integration"
         ),
         .target(
             name: "System Foundation Library Integration",
             dependencies: [
-                .target(name: "System"),
+                .target(name: "System Primitives"),
                 .target(name: "System Standard Library Integration"),
             ],
             path: "Sources/System Foundation Library Integration"
@@ -64,14 +64,14 @@ let package = Package(
         .target(
             name: "System Test Support",
             dependencies: [
-                .target(name: "System"),
+                .target(name: "System Primitives"),
             ],
             path: "Tests/Support"
         ),
         .testTarget(
             name: "System Tests",
             dependencies: [
-                .target(name: "System"),
+                .target(name: "System Primitives"),
                 .target(name: "System Test Support"),
                 .target(name: "System Standard Library Integration"),
                 .target(name: "System Foundation Library Integration"),

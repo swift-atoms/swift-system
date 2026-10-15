@@ -1,4 +1,4 @@
-import System
+import System_Primitives
 import Testing
 
 @Suite("System topology CPU identifiers")
