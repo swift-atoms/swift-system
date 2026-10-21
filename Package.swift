@@ -49,7 +49,7 @@ let package = Package(
         .target(
             name: "System Standard Library Integration",
             dependencies: [
-                .target(name: "System Primitives"),
+                .target(name: "System Primitives")
             ],
             path: "Sources/System Standard Library Integration"
         ),
@@ -64,7 +64,7 @@ let package = Package(
         .target(
             name: "System Test Support",
             dependencies: [
-                .target(name: "System Primitives"),
+                .target(name: "System Primitives")
             ],
             path: "Tests/Support"
         ),
@@ -85,14 +85,15 @@ let package = Package(
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }
